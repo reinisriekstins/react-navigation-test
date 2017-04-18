@@ -9,41 +9,64 @@ import {
   StyleSheet,
   Text,
   View,
-  Button
+  Button,
+  TextInput,
+  Platform
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 
-function MainScreen({ navigation }) {
-  const { navigate } = navigation;
-  return (
-    <View style={styles.container}>
-      <Text>Welcome to the main screen!</Text>
-      <Button
-        title="Open profile panel"
-        color="cyan"
-        onPress={()=> navigate('Profile')}
-      />
-    </View>
-  );
+class MainScreen extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = { text: '' }
+    try {
+      this.state.text = this.props.navigation.state.params.user
+    } catch(e) {}
+  }
+  render() {
+    const { navigate } = this.props.navigation;
+    return (
+      <View style={styles.container}>
+        <Text>Welcome to the Main Screen!</Text>
+        <TextInput
+          value={this.state.text}
+          onChangeText={(text) => this.setState({text})}
+          placeholder="Enter User..."
+          style={{width: 200}}
+        />
+        <Button
+          title="Open Profile Screen"
+          color="cyan"
+          onPress={()=> navigate('Profile', { user: this.state.text })}
+        />
+      </View>
+    )
+  }
 }
 
 function ProfileScreen({ navigation }) {
-  const { navigate } = navigation;
+  const { navigate, state } = navigation;
   return (
     <View style={styles.container}>
-      <Text>Welcome to the profile screen!</Text>
+      <Text>Welcome to {state.params.user ? state.params.user : 'No one' }'s Profile Screen!</Text>
       <Button
-        title="Open main panel"
+        title="Open Main Screen"
         color="red"
-        onPress={()=> navigate('Main')}
+        onPress={()=> navigate('Main', { user: state.params.user})}
       />
     </View>
   );
 }
 
 const App = StackNavigator({
-  Main: { screen: MainScreen },
-  Profile: { screen: ProfileScreen },
+  Main: { screen: MainScreen, path: 'main' },
+  Profile: { screen: ProfileScreen, path: 'profile/:user' },
+}, {
+  containerOptions: {
+    // on Android, the URI prefix typically contains a host in addition to scheme
+    URIPrefix: Platform.OS == 'android' ? 'reactnavtest://reactnavtest/' : 'reactnavtest://',
+  },
 })
 
 
