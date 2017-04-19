@@ -59,9 +59,25 @@ function ProfileScreen({ navigation }) {
   );
 }
 
+function SettingsScreen() {
+  return (
+    <View style={styles.container}>
+      <Text style={{ color: 'blue', fontWeight: '800' }}>
+        Let's just pretend you can edit different user settings here!
+      </Text>
+      <Button
+        title="Open Main Screen"
+        color="dodgerblue"
+        onPress={()=> navigate('Main', { user: state.params.user})}
+      />
+    </View>
+  )
+}
+
 const App = StackNavigator({
   Main: { screen: MainScreen, path: 'main' },
   Profile: { screen: ProfileScreen, path: 'profile/:user' },
+  Settings: { screen: SettingsScreen, path: 'settings' },
 }, {
   containerOptions: {
     // on Android, the URI prefix typically contains a host in addition to scheme
