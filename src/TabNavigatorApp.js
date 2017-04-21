@@ -8,6 +8,11 @@ import {
   TabNavigator,
   StackNavigator,
 } from 'react-navigation';
+import {
+  Container,
+} from 'native-base';
+import TabBarComponent from './TabBarComponent';
+import HeaderComponent from './HeaderComponent';
 import CreateScreen from './CreateScreen';
 
 const containerOptions = {
@@ -15,88 +20,102 @@ const containerOptions = {
   URIPrefix: Platform.OS == 'android' ? 'reactnavtest://reactnavtest/' : 'reactnavtest://',
 }
 
-const MainScreen = CreateScreen({ color: 'dodgerblue', name: 'Main' });
-const SettingsScreen = CreateScreen({ color: 'green', name: 'Settings' });
+// const MainScreen = CreateScreen({ color: 'dodgerblue', name: 'Main' });
+// const SettingsScreen = CreateScreen({ color: 'green', name: 'Settings' });
+// const ProfileScreen = CreateScreen({
+//   color: 'red',
+//   name: 'Profile',
+//   buttonText: 'Change profile picture',
+//   onButtonPress: ({ navigate }) => navigate('ChangeProfilePicture'),
+// });
+// const ChangeProfilePictureScreen = CreateScreen({
+//   color: 'orange',
+//   name: 'Change Profile Picture',
+//   buttonText: 'Go back to profile screen',
+//   onButtonPress: ({ navigate }) => navigate('Profile'),
+// });
+
+// const TabNavigatorApp = TabNavigator({
+//   Main: {
+//     screen: MainScreen,
+//     path: '',
+//   },
+//   Profile: {
+//     screen: StackNavigator({
+//       Profile: {
+//         screen: ProfileScreen,
+//         path: 'profile',
+//       },
+//       ChangeProfilePicture: {
+//         screen: ChangeProfilePictureScreen,
+//         path: 'change-picture',
+//       },
+//     }, { initialRoute: 'Profile' })},
+//   Settings: {
+//     screen: SettingsScreen,
+//     path: 'settings',
+//   },
+// }, {
+//   tabBarPosition: 'bottom',
+//   containerOptions,
+// });
+
+// export default TabNavigatorApp;
+
+const LockersScreen = CreateScreen({ color: 'dodgerblue', name: 'Lockers' })
+const HistoryScreen = CreateScreen({ color: 'red', name: 'History' })
 const ProfileScreen = CreateScreen({
-  color: 'red',
-  name: 'Profile',
-  buttonText: 'Change profile picture',
-  onButtonPress: ({ navigate }) => navigate('ChangeProfilePicture'),
-});
-const ChangeProfilePictureScreen = CreateScreen({
   color: 'orange',
-  name: 'Change Profile Picture',
-  buttonText: 'Go back to profile screen',
-  onButtonPress: ({ navigate }) => navigate('Profile'),
-});
-
-
-
-const TabNavigatorApp = TabNavigator({
-  Main: {
-    screen: MainScreen,
-    path: '/',
-  },
-  Profile: {
-    screen: StackNavigator({
-      Profile: {
-        screen: ProfileScreen,
-        path: 'profile',
-      },
-      ChangeProfilePicture: {
-        screen: ChangeProfilePictureScreen,
-        path: 'change-picture',
-      },
-    }, { initialRoute: 'Profile' })},
-  Settings: {
-    screen: SettingsScreen,
-    path: 'settings',
-  },
-}, {
-  tabBarPosition: 'bottom',
-  containerOptions,
-});
+  name: 'Profile',
+  onButtonPress: ({ navigate }) => navigate('ChangePassword'),
+  buttonText: 'Change Password',
+})
+const ChangePasswordScreen = CreateScreen({ color: 'magenta', name: 'ChangePassword' })
 
 const QlockApp = StackNavigator({
   Main: {
     screen: TabNavigator({
       Lockers: {
-        screen: CreateScreen({ color: 'dodgerblue', name: 'Lockers' }),
-        navigationOptions: { title: 'Lockers' },
+        screen: LockersScreen,
+        path: 'lockers',
+        navigationOptions: {
+          title: 'Lockers',
+        },
       },
       History: {
-        screen: CreateScreen({ color: 'red', name: 'History' }),
-        navigationOptions: { title: 'History' },
+        screen: HistoryScreen,
+        path: 'history',
+        navigationOptions: {
+          title: 'History',
+        },
       },
       Profile: {
-        screen: CreateScreen({
-          color: 'orange',
-          name: 'Profile',
-          onButtonPress: ({ navigate }) => navigate('ChangePassword'),
-          buttonText: 'Change Password',
-        }),
-        navigationOptions: { title: 'Profile' },
+        screen: ProfileScreen,
+        path: 'profile',
+        navigationOptions: {
+          title: 'Profile',
+        },
       },
     }, {
       tabBarPosition: 'bottom',
-      /*tabBarComponent: () => (
-        <View>
-          <Text>this is a thing</Text>
-        </View>
-      ),*/
+      tabBarComponent: TabBarComponent,
     }),
+    path: 'main',
   },
   ChangePassword: {
-    screen: CreateScreen({ color: 'magenta', name: 'ChangePassword' }),
+    screen: ChangePasswordScreen,
+    path: 'change-password',
     navigationOptions: {
       title: 'Change Password',
-    }
+    },
   },
 }, {
-  // // possible workaround to the buggy navigationOptions could be
-  // // to use headerMode: none and create a custom header inside the component
-  // headerMode: 'none',
+  headerComponent: HeaderComponent,
+  containerOptions,
 })
 
-export default QlockApp
-
+export default (props) => (
+  <Container>
+    <QlockApp {...props} />
+  </Container>
+);
