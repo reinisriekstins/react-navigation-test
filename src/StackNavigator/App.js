@@ -12,7 +12,7 @@ import SettingsScreen from './SettingsScreen';
 import ProfileScreen from './ProfileScreen';
 
 
-const App = StackNavigator({
+const StackNavigatorApp = StackNavigator({
   Main: { screen: MainScreen, path: 'main' },
   Settings: { screen: SettingsScreen, path: 'settings' },
   Profile: { screen: ProfileScreen, path: 'profile/:user' },
@@ -23,4 +23,4 @@ const App = StackNavigator({
   },
 })
 
-export default App
+export default StackNavigatorApp

@@ -5,7 +5,7 @@ import {
   Button,
   TextInput,
 } from 'react-native';
-import styles from './styles';
+import styles from '../styles';
 
 export default class MainScreen extends React.Component {
   constructor(props) {
