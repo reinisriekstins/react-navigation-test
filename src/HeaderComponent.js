@@ -12,28 +12,41 @@ import {
   Icon,
 } from 'native-base';
 
-function HeaderComponent(props) {
+export default function HeaderComponent(props) {
   const {
     navigationState,
     navigation,
-    renderTitleComponent,
-    renderRightComponent,
+    router,
+    scene,
+    getScreenDetails,
   } = props;
 
+  const navigationOptions = getScreenDetails(scene).options;
   return (
     <Header>
       <Left>
-        <Button light transparent iconLeft onPress={() => navigation.goBack()}>
-          <Icon name='arrow-back' />
-          <Text style={{ color: 'white' }}>Cancel</Text>
-        </Button>
+      {/*render left part of top bar*/}
+      {(() => {
+        if (scene.index === 0) return null;
+        return (
+          <Button
+            light
+            transparent
+            iconLeft
+            onPress={() => navigation.goBack()}
+          >
+            <Icon name='arrow-back' />
+            <Text style={{ color: 'white' }}>Cancel</Text>
+          </Button>
+        );
+      })()}
       </Left>
       <Body>
-        <Title style={{ textAlign: 'center' }}>Title</Title>
+        <Title>
+          {navigationOptions.title || navigationOptions.tabBarLabel}
+        </Title>
       </Body>
       <Right />
     </Header>
   )
 }
-
-export default HeaderComponent;
