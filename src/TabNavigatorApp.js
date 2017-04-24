@@ -63,11 +63,12 @@ const QlockApp = StackNavigator({
   },
 }, {
   headerComponent: HeaderComponent,
-  containerOptions,
 })
+
+const prefix = Platform.OS == 'android' ? 'reactnavtest://reactnavtest/' : 'reactnavtest://';
 
 export default (props) => (
   <Container>
-    <QlockApp {...props} />
+    <QlockApp {...props} uriPrefix={prefix} />
   </Container>
 );
