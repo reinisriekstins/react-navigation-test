@@ -5,33 +5,34 @@ import {
 import {
   Footer,
   FooterTab,
-  Icon,
   Button,
 } from 'native-base';
 
 function TabBarComponent(props) {
   const {
+    navigation,
     navigationState,
     jumpToIndex,
+    renderIcon,
+    getLabel,
   } = props;
 
-  // TabBarComponent.defaultProps = {
-  //   showLabel: true,
-  //   showIcon: true,
-  // }
-
-  console.log('TabBarComponent props: ', props)
   return (
     <Footer>
-    {navigationState.routes.map((route, index) => (
-      <FooterTab key={index}>
-        <Button onPress={() => jumpToIndex(index)}>
-          <Text style={{ color: 'white' }}>{route.routeName}</Text>
-          {/*HARD CODE ICONS IF CAN'T FIND A WAY TO CONFIGURE THEM*/}
-          <Icon name='ios-key-outline' />
-        </Button>
-      </FooterTab>
-    ))}
+    {navigationState.routes.map((route, index) => {
+      const focused = index === navigation.state.index;
+      const scene = { route, index, focused };
+      return (
+        <FooterTab key={index}>
+          <Button active={focused} onPress={() => jumpToIndex(index)}>
+            <Text style={{ color: 'white' }}>
+              {getLabel(scene)}
+            </Text>
+            {renderIcon(scene)}
+          </Button>
+        </FooterTab>
+      );
+    })}
     </Footer>
   )
 }
