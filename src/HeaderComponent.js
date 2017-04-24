@@ -1,38 +1,37 @@
 import React from 'react';
 import {
-  
+  Text,
 } from 'react-native';
 import {
+  Button,
   Header,
   Left,
   Body,
   Right,
   Title,
+  Icon,
 } from 'native-base';
 
 function HeaderComponent(props) {
   const {
     navigationState,
-    renderLeftComponent,
+    navigation,
     renderTitleComponent,
     renderRightComponent,
   } = props;
-  // let routeName = '';
 
-  // let currentRoutes = navigationState.routes;
-  // while (typeof currentRoutes !== 'undefined') {
-  //   routeName = currentRoute.routeName;
-
-
-  // }
-  console.log('HeaderComponent props: ', props)
   return (
     <Header>
-      <Left>{renderLeftComponent(props)}</Left>
+      <Left>
+        <Button light transparent iconLeft onPress={() => navigation.goBack()}>
+          <Icon name='arrow-back' />
+          <Text style={{ color: 'white' }}>Cancel</Text>
+        </Button>
+      </Left>
       <Body>
-        <Title>{renderTitleComponent(props)}</Title>
+        <Title style={{ textAlign: 'center' }}>Title</Title>
       </Body>
-      <Right>{renderRightComponent(props)}</Right>
+      <Right />
     </Header>
   )
 }
