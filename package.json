@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "android": "react-native run-android",
-    "deep-link": "adb shell am start -W -a android.intent.action.VIEW -d \"reactnavtest://reactnavtest/profile/Taylor\"",
+    "deep-link": "adb shell am start -W -a android.intent.action.VIEW -d \"reactnavtest://reactnavtest/change-password\"",
     "test": "jest",
     "devtools": "react-devtools"
   },
