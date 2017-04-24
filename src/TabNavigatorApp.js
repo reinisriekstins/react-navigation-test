@@ -1,7 +1,5 @@
 import React from 'react';
 import {
-  Text,
-  View,
   Platform,
 } from 'react-native';
 import {
@@ -10,57 +8,11 @@ import {
 } from 'react-navigation';
 import {
   Container,
+  Icon,
 } from 'native-base';
 import TabBarComponent from './TabBarComponent';
 import HeaderComponent from './HeaderComponent';
 import CreateScreen from './CreateScreen';
-
-const containerOptions = {
-  // on Android, the URI prefix typically contains a host in addition to scheme
-  URIPrefix: Platform.OS == 'android' ? 'reactnavtest://reactnavtest/' : 'reactnavtest://',
-}
-
-// const MainScreen = CreateScreen({ color: 'dodgerblue', name: 'Main' });
-// const SettingsScreen = CreateScreen({ color: 'green', name: 'Settings' });
-// const ProfileScreen = CreateScreen({
-//   color: 'red',
-//   name: 'Profile',
-//   buttonText: 'Change profile picture',
-//   onButtonPress: ({ navigate }) => navigate('ChangeProfilePicture'),
-// });
-// const ChangeProfilePictureScreen = CreateScreen({
-//   color: 'orange',
-//   name: 'Change Profile Picture',
-//   buttonText: 'Go back to profile screen',
-//   onButtonPress: ({ navigate }) => navigate('Profile'),
-// });
-
-// const TabNavigatorApp = TabNavigator({
-//   Main: {
-//     screen: MainScreen,
-//     path: '',
-//   },
-//   Profile: {
-//     screen: StackNavigator({
-//       Profile: {
-//         screen: ProfileScreen,
-//         path: 'profile',
-//       },
-//       ChangeProfilePicture: {
-//         screen: ChangeProfilePictureScreen,
-//         path: 'change-picture',
-//       },
-//     }, { initialRoute: 'Profile' })},
-//   Settings: {
-//     screen: SettingsScreen,
-//     path: 'settings',
-//   },
-// }, {
-//   tabBarPosition: 'bottom',
-//   containerOptions,
-// });
-
-// export default TabNavigatorApp;
 
 const LockersScreen = CreateScreen({ color: 'dodgerblue', name: 'Lockers' })
 const HistoryScreen = CreateScreen({ color: 'red', name: 'History' })
