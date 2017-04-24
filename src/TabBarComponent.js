@@ -15,10 +15,10 @@ function TabBarComponent(props) {
     jumpToIndex,
   } = props;
 
-  TabBarComponent.defaultProps = {
-    showLabel: true,
-    showIcon: true,
-  }
+  // TabBarComponent.defaultProps = {
+  //   showLabel: true,
+  //   showIcon: true,
+  // }
 
   console.log('TabBarComponent props: ', props)
   return (
@@ -26,7 +26,8 @@ function TabBarComponent(props) {
     {navigationState.routes.map((route, index) => (
       <FooterTab key={index}>
         <Button onPress={() => jumpToIndex(index)}>
-          <Text>{route.routeName}</Text>
+          <Text style={{ color: 'white' }}>{route.routeName}</Text>
+          {/*HARD CODE ICONS IF CAN'T FIND A WAY TO CONFIGURE THEM*/}
           <Icon name='ios-key-outline' />
         </Button>
       </FooterTab>
