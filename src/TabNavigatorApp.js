@@ -32,6 +32,7 @@ const QlockApp = StackNavigator({
         path: 'lockers',
         navigationOptions: {
           title: 'Lockers',
+          tabBarIcon: () => <Icon name="ios-key-outline" />,
         },
       },
       History: {
@@ -39,6 +40,7 @@ const QlockApp = StackNavigator({
         path: 'history',
         navigationOptions: {
           title: 'History',
+          tabBarIcon: () => <Icon name="ios-timer-outline" />,
         },
       },
       Profile: {
@@ -46,6 +48,7 @@ const QlockApp = StackNavigator({
         path: 'profile',
         navigationOptions: {
           title: 'Profile',
+          tabBarIcon: () => <Icon name="ios-person-outline" />,
         },
       },
     }, {
